@@ -1,14 +1,43 @@
 <template>
-    <div>{{prop}}</div>
+  <div class="wrapper">
+    <div class="row" v-for="(row, i) in pattern" :key="`row-${i}`">
+      <div class="square" v-for="(val, j) in row" :key="`${i}-${j}`">
+          <div class="btn" @click="$emit('click-square', {i,j})" v-bind:class="{'is-active':val==1}"></div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
 export default {
-    name: "Template",
-    props: ['prop']
-}
+  name: "Grid",
+  props: ["pattern"]
+};
 </script>
 
 <style scoped>
+.btn {
+    background-color: antiquewhite;
+    border: solid 1px black;
+    margin: 0;
+    padding: 0;
+    height: 10px;
+    width: 10px;
+}
+.is-active {
+    background-color: black;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    margin: auto;
+}
 
+.row {
+    display: flex;
+}
+
+.square {
+    display: flex;
+}
 </style>
