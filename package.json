@@ -1,5 +1,5 @@
 {
-  "name": "gol",
+  "name": "Game of Life",
   "version": "0.1.0",
   "private": true,
   "scripts": {
@@ -9,6 +9,7 @@
   },
   "dependencies": {
     "core-js": "^3.6.4",
+    "uuid": "^8.0.0",
     "vue": "^2.6.11"
   },
   "devDependencies": {
