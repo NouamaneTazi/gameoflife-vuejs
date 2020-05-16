@@ -18,11 +18,11 @@ export default {
 <style scoped>
 .btn {
     background-color: antiquewhite;
-    border: solid 1px black;
+    border: solid 1px white;
     margin: 0;
     padding: 0;
-    height: 10px;
-    width: 10px;
+    height: 5px;
+    width: 5px;
 }
 .is-active {
     background-color: black;

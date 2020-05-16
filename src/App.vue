@@ -15,8 +15,8 @@
 import Header from "./components/Header.vue";
 import Grid from "./components/Grid.vue";
 import Controls from "./components/Controls.vue";
-import GOL from "./GOL/gol.js"
-
+import GOL from "./GOL/gol.js";
+import axios from 'axios';
 export default {
   name: "App",
   components: {
@@ -25,28 +25,51 @@ export default {
     Controls
   },
   data() {
+    const grid_length = 100;
+    axios
+      .get("https://api.coindesk.com/v1/bpi/currentprice.json")
+      .then(response => (this.info = response.data.bpi));
+
     return {
-      pattern : new Array(10).fill(null).map(() => Array(10).fill(0))
-    }
+      pattern: new Array(grid_length)
+        .fill(null)
+        .map(() => Array(grid_length).fill(0)),
+      grid_length
+    };
   },
   methods: {
-    clickSquare({i,j}) {
+    clickSquare({ i, j }) {
+      clearInterval(this.timer);
       var tempArray = [];
       tempArray = this.pattern.slice();
-      tempArray[i][j]  = 1 - tempArray[i][j];
+      tempArray[i][j] = 1 - tempArray[i][j];
       this.pattern = tempArray;
     },
     clickNext() {
-      this.pattern = GOL.getNextPattern(this.pattern.slice())
+      clearInterval(this.timer);
+      this.pattern = GOL.getNextPattern(this.pattern.slice());
     },
     clickPlay() {
-
+      this.timer = setInterval(
+        () => (this.pattern = GOL.getNextPattern(this.pattern.slice())),
+        500
+      );
     },
     clickClear() {
-
+      clearInterval(this.timer);
+      this.pattern = new Array(this.grid_length)
+        .fill(null)
+        .map(() => Array(this.grid_length).fill(0));
     },
     clickRandom() {
-
+      clearInterval(this.timer);
+      this.pattern = Array(this.grid_length)
+        .fill()
+        .map(() =>
+          Array(this.grid_length)
+            .fill()
+            .map(() => Math.round(Math.random() * 0.52))
+        );
     }
   }
 };
