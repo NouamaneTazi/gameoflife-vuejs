@@ -5,12 +5,9 @@
       <button @click="$emit('click-play')">Play</button>
       <button @click="$emit('click-clear')">Clear</button>
       <button @click="$emit('click-random')">Random</button>
-      <select v-model="selected">
-        <option
-          v-for="option in options"
-          v-bind:value="option.value"
-          :key="option.text"
-        >{{ option.text }}</option>
+      <select :value="selected" @input="$emit('select-pattern', $event.target.value)">
+        <option :value="null">– Select a ... –</option>
+        <option v-for="(value, name) in preset_patterns" :key="name">{{ name }}</option>
       </select>
       <span>Selected: {{ selected }}</span>
     </div>
@@ -20,14 +17,10 @@
 <script>
 export default {
   name: "Controls",
+  props: ["preset_patterns"],
   data() {
     return {
-      selected: "A",
-      options: [
-        { text: "One", value: "A" },
-        { text: "Two", value: "B" },
-        { text: "Three", value: "C" }
-      ]
+      selected: ""
     };
   }
 };

@@ -7,6 +7,8 @@
       @click-play="clickPlay"
       @click-clear="clickClear"
       @click-random="clickRandom"
+      @select-pattern="selectPattern"
+      v-bind:preset_patterns="preset_patterns"
     />
   </div>
 </template>
@@ -16,7 +18,7 @@ import Header from "./components/Header.vue";
 import Grid from "./components/Grid.vue";
 import Controls from "./components/Controls.vue";
 import GOL from "./GOL/gol.js";
-import axios from 'axios';
+import axios from "axios";
 export default {
   name: "App",
   components: {
@@ -26,15 +28,12 @@ export default {
   },
   data() {
     const grid_length = 100;
-    axios
-      .get("https://api.coindesk.com/v1/bpi/currentprice.json")
-      .then(response => (this.info = response.data.bpi));
-
     return {
       pattern: new Array(grid_length)
         .fill(null)
         .map(() => Array(grid_length).fill(0)),
-      grid_length
+      grid_length,
+      preset_patterns: {}
     };
   },
   methods: {
@@ -70,7 +69,21 @@ export default {
             .fill()
             .map(() => Math.round(Math.random() * 0.52))
         );
+    },
+    selectPattern(name) {
+      clearInterval(this.timer);
+      if (name) this.pattern = this.preset_patterns[name];
     }
+  },
+  created() {
+    const patterns_link = "https://thunder-dev.flashbrand.me/recruitment/life/";
+    axios.get(patterns_link).then(res => {
+      res.data.patternList.map(preset => {
+        axios.get(patterns_link + preset).then(res => {
+          this.$set(this.preset_patterns, preset, res.data.pattern)
+        });
+      });
+    });
   }
 };
 </script>
@@ -84,5 +97,6 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+  background-color: #fefefe;
 }
 </style>
