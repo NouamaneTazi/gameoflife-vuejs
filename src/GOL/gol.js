@@ -12,11 +12,11 @@ const GOL = {
         for (var i=0;i<pattern.length;i++) {
             for (var j=0;j<pattern[0].length;j++) {
                 const alive_ngbrs = this.getAliveNeighbours({i,j}, pattern)
-                if (alive_ngbrs>=3){
+                if (alive_ngbrs==3 && pattern[i][j]!=1){
                     livesNext.push({i,j})
-                } else if (alive_ngbrs==2){
+                } else if (alive_ngbrs==2 || alive_ngbrs==3){
                     staysAlive.push({i,j})
-                } else if (pattern[i][j]==1 && alive_ngbrs<2){
+                } else if (pattern[i][j]==1){
                     diesNext.push({i,j})
                 }
             }

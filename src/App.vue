@@ -51,7 +51,7 @@ export default {
     clickPlay() {
       this.timer = setInterval(
         () => (this.pattern = GOL.getNextPattern(this.pattern.slice())),
-        500
+        200
       );
     },
     clickClear() {
