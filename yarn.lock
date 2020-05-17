@@ -7819,6 +7819,13 @@ vm-browserify@^1.0.1:
   resolved "https://registry.npm.taobao.org/vm-browserify/download/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"
   integrity sha1-eGQcSIuObKkadfUR56OzKobl3aA=
 
+vue-element-loading@^1.1.5:
+  version "1.1.5"
+  resolved "https://registry.yarnpkg.com/vue-element-loading/-/vue-element-loading-1.1.5.tgz#4efbe3d500c8a1fd32246032ff7af37a56394900"
+  integrity sha512-nXEa8xNOYSefm7QpXo0fPwjVQZHrFsGwFlNbHAGjE+kcLPgUaHqfKk638Rqvx9aPZXNVcgpAVUDj53kGlqT6HQ==
+  dependencies:
+    vue "^2.5.22"
+
 vue-eslint-parser@^7.0.0:
   version "7.1.0"
   resolved "https://registry.npm.taobao.org/vue-eslint-parser/download/vue-eslint-parser-7.1.0.tgz#9cdbcc823e656b087507a1911732b867ac101e83"
@@ -7847,6 +7854,13 @@ vue-loader@^15.9.1:
     vue-hot-reload-api "^2.3.0"
     vue-style-loader "^4.1.0"
 
+vue-slide-bar@^1.2.0:
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/vue-slide-bar/-/vue-slide-bar-1.2.0.tgz#d77e1c09ffff35a205109c532d0eefbfc39b217f"
+  integrity sha512-SewM0C1lt7s0vrp9N1u3dA0yVNEj2kTs+m2bHhe+Mc/NYmjqcU3IcbKlVrrbWOkAjrLFYQ3OmsvVEl60Xzb8+w==
+  dependencies:
+    vue "^2.5.22"
+
 vue-style-loader@^4.1.0, vue-style-loader@^4.1.2:
   version "4.1.2"
   resolved "https://registry.npm.taobao.org/vue-style-loader/download/vue-style-loader-4.1.2.tgz#dedf349806f25ceb4e64f3ad7c0a44fba735fcf8"
@@ -7868,7 +7882,7 @@ vue-template-es2015-compiler@^1.9.0:
   resolved "https://registry.npm.taobao.org/vue-template-es2015-compiler/download/vue-template-es2015-compiler-1.9.1.tgz#1ee3bc9a16ecbf5118be334bb15f9c46f82f5825"
   integrity sha1-HuO8mhbsv1EYvjNLsV+cRvgvWCU=
 
-vue@^2.6.11:
+vue@^2.5.22, vue@^2.6.11:
   version "2.6.11"
   resolved "https://registry.npm.taobao.org/vue/download/vue-2.6.11.tgz#76594d877d4b12234406e84e35275c6d514125c5"
   integrity sha1-dllNh31LEiNEBuhONSdcbVFBJcU=

@@ -1,15 +1,21 @@
 <template>
   <div id="app">
-    <Header />
-    <Grid v-bind:pattern="pattern" @click-square="clickSquare" />
-    <Controls
-      @click-next="clickNext"
-      @click-play="clickPlay"
-      @click-clear="clickClear"
-      @click-random="clickRandom"
-      @select-pattern="selectPattern"
-      v-bind:preset_patterns="preset_patterns"
-    />
+    <div class="main-wrapper">
+      <vue-element-loading :active="isLoading" :is-full-screen="true" />
+      <Header />
+      <div class="flex-container">
+        <Grid v-bind:pattern="pattern" @click-square="clickSquare" />
+        <Controls
+          @click-next="clickNext"
+          @click-play="clickPlay"
+          @click-clear="clickClear"
+          @click-random="clickRandom"
+          @select-pattern="selectPattern"
+          @select-playspeed="selectPlaySpeed"
+          v-bind:preset_patterns="preset_patterns"
+        />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -19,12 +25,15 @@ import Grid from "./components/Grid.vue";
 import Controls from "./components/Controls.vue";
 import GOL from "./GOL/gol.js";
 import axios from "axios";
+import VueElementLoading from "vue-element-loading";
+
 export default {
   name: "App",
   components: {
     Header,
     Grid,
-    Controls
+    Controls,
+    VueElementLoading
   },
   data() {
     const grid_length = 100;
@@ -33,7 +42,9 @@ export default {
         .fill(null)
         .map(() => Array(grid_length).fill(0)),
       grid_length,
-      preset_patterns: {}
+      preset_patterns: {},
+      play_speed: 200,
+      isLoading: false
     };
   },
   methods: {
@@ -51,8 +62,13 @@ export default {
     clickPlay() {
       this.timer = setInterval(
         () => (this.pattern = GOL.getNextPattern(this.pattern.slice())),
-        200
+        this.play_speed
       );
+    },
+    selectPlaySpeed(val) {
+      this.play_speed = val;
+      clearInterval(this.timer);
+      this.clickPlay();
     },
     clickClear() {
       clearInterval(this.timer);
@@ -70,25 +86,43 @@ export default {
             .map(() => Math.round(Math.random() * 0.52))
         );
     },
-    selectPattern(name) {
-      clearInterval(this.timer);
-      if (name) this.pattern = this.preset_patterns[name];
-    }
-  },
-  created() {
-    const patterns_link = "https://thunder-dev.flashbrand.me/recruitment/life/";
-    axios.get(patterns_link).then(res => {
-      res.data.patternList.map(preset => {
-        axios.get(patterns_link + preset).then(res => {
-          this.$set(this.preset_patterns, preset, res.data.pattern)
+    fetchPatterns() {
+      const patterns_link =
+        "https://thunder-dev.flashbrand.me/recruitment/life/";
+      this.isLoading = true; // show loading screen
+      axios.get(patterns_link).then(res => {
+        const n_patterns = res.data.patternList.length;
+        res.data.patternList.map((preset, i) => {
+          axios
+            .get(patterns_link + preset)
+            .then(res => {
+              this.$set(this.preset_patterns, preset, res.data.pattern);
+              if (i == n_patterns - 1) {
+                setTimeout(() => (this.isLoading = false), 200);
+              }
+            })
+            .catch(e => {
+              console.log("Error fetching patterns: ", e);
+              if (i == n_patterns - 1) {
+                setTimeout(() => (this.isLoading = false), 200);
+              }
+            });
         });
       });
-    });
+    },
+    selectPattern(name) {
+      clearInterval(this.timer);
+      if (name) this.pattern = this.preset_patterns[name].map(a => [...a]);
+    }
+  },
+  mounted() {
+    this.fetchPatterns();
   }
 };
 </script>
 
 <style>
+body { margin: 0; }
 #app {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
@@ -96,7 +130,20 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
   background-color: #fefefe;
+}
+.main-wrapper {
+  /* width: 100%; */
+  /* min-width:100%; */
+}
+.flex-container {
+  display: flex;
+  justify-content: center;
+}
+@media screen and (max-width: 900px) {
+  .flex-container {
+    flex-wrap: wrap;
+    /* max-width: 100%; */
+  }
 }
 </style>
