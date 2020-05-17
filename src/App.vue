@@ -28,6 +28,7 @@ import Controls from "./components/Controls.vue";
 import GOL from "./GOL/gol.js";
 import axios from "axios";
 import VueElementLoading from "vue-element-loading";
+// import flashbrandLogo from "./assets/flashbrand_logo_embedded.vue"
 
 export default {
   name: "App",
@@ -126,7 +127,7 @@ export default {
 
 <style>
 body {
-  overflow: hidden;
+  overflow-x: hidden;
 }
 #app {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,

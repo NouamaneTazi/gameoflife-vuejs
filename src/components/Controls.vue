@@ -16,7 +16,6 @@
       <sui-dropdown
         placeholder="Select a pattern"
         selection
-        search
         @input="e => $emit('select-pattern', e) "
         :options="options"
         v-model="selected"

@@ -43,24 +43,25 @@ export default {
 </script>
 
 <style scoped>
-
-/* .wrapper {
-  display: block;
-  width: 50%;
-} */
 .flex-container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  /* margin: 200px; */
 }
 .btn {
-  background-color: #f3f2f2;
+  background-color: #ebebeb;
   border: solid 1px white;
   margin: 0;
   padding: 0;
-  height: 5px;
-  width: 5px;
+  height: 6px;
+  width: 6px;
+}
+
+@media screen and (max-width: 900px) {
+  .btn {
+    width: 5;
+    height: 5px;
+  }
 }
 .is-active {
   background-color: #4DA1A1;
