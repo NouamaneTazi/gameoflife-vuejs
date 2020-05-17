@@ -1,5 +1,8 @@
 const GOL = {
+    // Game of Life policy rules
+
     getAliveNeighbours : function(coors, pattern) {
+        // returns the alive neighbours of a square in the current pattern
         let {i,j}= coors
         const ngbrs_candidates = [[1,0],[-1,0],[0,1],[0,-1],[1,1],[-1,-1],[1,-1],[-1,1]]
         const isInRange = function(coors) {
@@ -8,6 +11,7 @@ const GOL = {
         return ngbrs_candidates.filter(([n,m]) => isInRange([i+n,j+m]) ? pattern[i+n][j+m]==1 : false).length
     },
     getNextPattern : function(pattern) {
+        // updates the pattern according to Game of Life policies
         let livesNext = [], diesNext = [], staysAlive = []
         for (var i=0;i<pattern.length;i++) {
             for (var j=0;j<pattern[0].length;j++) {

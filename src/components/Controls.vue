@@ -21,6 +21,7 @@
           <i class="cloud download icon"></i> Load
         </sui-button>
       </div>
+      <!-- Preset patterns dropdown menu -->
       <sui-dropdown
         placeholder="Select a pattern"
         selection
@@ -28,7 +29,7 @@
         :options="options"
         v-model="selected"
       />
-
+      <!-- Playspeed slider -->
       <vue-slide-bar
         v-model="sliderCustomzie.val"
         :min="1"
@@ -69,6 +70,7 @@ export default {
   },
   computed: {
     options: function() {
+      // updates preset_patterns to convenient options format for dropdown menu
       return Object.keys(this.preset_patterns).map(name => ({
         text: name,
         value: name

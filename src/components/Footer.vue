@@ -1,10 +1,13 @@
 <template>
   <div class="footer">
+    <!-- Horizontal Divider -->
     <div class="ui horizontal divider">
       Made with
       <i class="heart icon"></i>
       by Nouamane Tazi
     </div>
+
+    <!-- Logo -->
     <img class="flashbrand-logo" :src="flashbrandLogo" />
   </div>
 </template>
@@ -26,7 +29,6 @@ export default {
 }
 .flashbrand-logo {
   width: 180px;
-  color: white;
   margin-bottom: 10px;
 }
 </style>

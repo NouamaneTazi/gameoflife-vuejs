@@ -28,14 +28,17 @@ export default {
   },
   methods: {
     mouseOverSquare({ i, j }) {
+      // selects square if drag while clicking
       if (this.mouseIsDown) {
         this.$emit("click-square", { i, j });
       }
     },
     mouseDown() {
+      // indicates that user is clicking. WARNING: Works only with mouse
       this.mouseIsDown = true;
     },
     mouseUp() {
+      // indicates that user is no longer clicking. WARNING: Works only with mouse
       this.mouseIsDown = false;
     }
   }

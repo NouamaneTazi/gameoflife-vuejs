@@ -1,19 +1,26 @@
 <template>
   <div class="header">
+    <!-- Title -->
     <h1>
       Conway's G<span class="green">a</span>me of L<span class="green">i</span>fe
     </h1>
-    <i @click='openInfo' class="info circle icon"></i>
+
+    <!-- Icon -->
+    <i @click="openInfo" class="info circle icon"></i>
   </div>
 </template>
 
 <script>
 export default {
-  name: "Headers",
+  name: "Header",
   methods: {
-      openInfo() {
-          window.open("https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life", "_blank");    
-      }
+    openInfo() {
+      // opens info page in a new tab
+      window.open(
+        "https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life",
+        "_blank"
+      );
+    }
   }
 };
 </script>
@@ -34,11 +41,10 @@ h1 {
   font-weight: 600;
 }
 .icon {
-    font-size: 1.5rem;
-    margin-left: 1rem;
-    /* display: contents; */
-    color: #3db5aaa6;
-    cursor: pointer;
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  color: #3db5aaa6;
+  cursor: pointer;
 }
 .green {
   color: #3db5aa;

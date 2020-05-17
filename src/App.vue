@@ -1,10 +1,19 @@
 <template>
   <div id="app">
     <div class="main-wrapper">
+      <!-- Loading screen -->
       <vue-element-loading :active="isLoading" :is-full-screen="true" />
+
+      <!-- Header -->
       <Header />
+
+      <!-- Body -->
       <div class="flex-container">
+
+        <!-- Grid -->
         <Grid v-bind:pattern="pattern" @click-square="clickSquare" />
+
+        <!-- Controls -->
         <Controls
           @click-next="clickNext"
           @click-play="clickPlay"
@@ -17,6 +26,8 @@
           v-bind:preset_patterns="preset_patterns"
         />
       </div>
+
+      <!-- Footer -->
       <Footer />
     </div>
   </div>
@@ -30,7 +41,6 @@ import Controls from "./components/Controls.vue";
 import GOL from "./GOL/gol.js";
 import axios from "axios";
 import VueElementLoading from "vue-element-loading";
-// import flashbrandLogo from "./assets/flashbrand_logo_embedded.vue"
 
 export default {
   name: "App",
@@ -55,44 +65,51 @@ export default {
   },
   methods: {
     clickSquare({ i, j }) {
+      // Upon clicking a square on the grid, we update the pattern
       clearInterval(this.timer);
       var tempArray = [];
       tempArray = this.pattern.slice();
-      tempArray[i][j] = 1 - tempArray[i][j];
+      tempArray[i][j] = 1 - tempArray[i][j]; // WARNING: we consider values to be 0 or 1 in the pattern
       this.pattern = tempArray;
     },
     clickNext() {
+      // Updates pattern by one iteration
       clearInterval(this.timer);
       this.pattern = GOL.getNextPattern(this.pattern.slice());
     },
     clickPlay() {
+      // Creates a loop to update pattern
       this.timer = setInterval(
         () => (this.pattern = GOL.getNextPattern(this.pattern.slice())),
         this.play_speed
       );
     },
     selectPlaySpeed(val) {
+      // Updates the playspeed with the value from the slider
       this.play_speed = val;
       clearInterval(this.timer);
       this.clickPlay();
     },
     clickClear() {
+      // Clears the grid
       clearInterval(this.timer);
       this.pattern = new Array(this.grid_length)
         .fill(null)
         .map(() => Array(this.grid_length).fill(0));
     },
     clickRandom() {
+      // Creates a random pattern
       clearInterval(this.timer);
       this.pattern = Array(this.grid_length)
         .fill()
         .map(() =>
           Array(this.grid_length)
             .fill()
-            .map(() => Math.round(Math.random() * 0.52))
+            .map(() => Math.round(Math.random() * 0.55))
         );
     },
     fetchPatterns() {
+      // fetch patterns from API
       const patterns_link =
         "https://thunder-dev.flashbrand.me/recruitment/life/";
       this.isLoading = true; // show loading screen
@@ -104,26 +121,30 @@ export default {
             .then(res => {
               this.$set(this.preset_patterns, preset, res.data.pattern);
               if (i == n_patterns - 1) {
-                setTimeout(() => (this.isLoading = false), 200);
+                setTimeout(() => (this.isLoading = false), 2000);
               }
             })
             .catch(e => {
               console.log("Error fetching patterns: ", e);
               if (i == n_patterns - 1) {
-                setTimeout(() => (this.isLoading = false), 200);
+                setTimeout(() => (this.isLoading = false), 2000);
               }
             });
         });
       });
     },
     selectPattern(name) {
+      // updates grid with the selected preset pattern
       clearInterval(this.timer);
       if (name) this.pattern = this.preset_patterns[name].map(a => [...a]);
     },
     savePattern() {
+      // saves pattern to localStorage
       localStorage.pattern = JSON.stringify(this.pattern)
     },
     loadPattern() {
+      // loads pattern from localStorage
+      clearInterval(this.timer);
       this.pattern = JSON.parse(localStorage.pattern)
     }
   },
@@ -146,10 +167,6 @@ body {
   color: #191847;
   background-color: #fefefe;
 }
-.main-wrapper {
-  /* width: 100%; */
-  /* min-width:100%; */
-}
 .flex-container {
   display: flex;
   justify-content: center;
@@ -157,7 +174,6 @@ body {
 @media screen and (max-width: 900px) {
   .flex-container {
     flex-wrap: wrap;
-    /* max-width: 100%; */
   }
 }
 </style>
