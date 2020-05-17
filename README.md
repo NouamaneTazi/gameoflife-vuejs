@@ -1,4 +1,4 @@
-# gol
+# Game of Life
 
 ## Project setup
 ```
@@ -20,5 +20,5 @@ yarn build
 yarn lint
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+### Author
+Nouamane Tazi 2020
