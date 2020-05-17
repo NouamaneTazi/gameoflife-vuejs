@@ -129,7 +129,7 @@ body { margin: 0; }
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #191847;
   background-color: #fefefe;
 }
 .main-wrapper {

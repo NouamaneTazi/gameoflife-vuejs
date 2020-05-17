@@ -17,8 +17,8 @@
         :lineHeight="sliderCustomzie.lineHeight"
         :tooltipStyles="sliderCustomzie.tooltipStyles"
         @input="e => $emit('select-playspeed', 1010 - Number.parseInt(e)*100)"
-        
       ></vue-slide-bar>
+      <v-btn depressed small color="primary">Primary</v-btn>
     </div>
   </div>
 </template>
@@ -38,11 +38,11 @@ export default {
         val: 7,
         lineHeight: 10,
         processStyle: {
-          backgroundColor: "#42b883"
+          backgroundColor: "#4a90e2"
         },
         tooltipStyles: {
-          backgroundColor: "#42b883",
-          borderColor: "#42b883"
+          backgroundColor: "#4a90e2",
+          borderColor: "#4a90e2"
         }
       }
     };
@@ -64,5 +64,7 @@ export default {
 .btns {
   display: flex;
   flex-direction: column;
+}
+.button {
 }
 </style>

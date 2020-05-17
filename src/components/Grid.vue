@@ -55,7 +55,7 @@ export default {
   /* margin: 200px; */
 }
 .btn {
-  background-color: antiquewhite;
+  background-color: #f3f2f2;
   border: solid 1px white;
   margin: 0;
   padding: 0;
@@ -63,7 +63,7 @@ export default {
   width: 5px;
 }
 .is-active {
-  background-color: black;
+  background-color: #4DA1A1;
 }
 .row {
   display: flex;
