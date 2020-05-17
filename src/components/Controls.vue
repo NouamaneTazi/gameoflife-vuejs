@@ -13,6 +13,14 @@
       <sui-button class="labeled icon" @click="$emit('click-random')">
         <i class="random icon"></i> Random
       </sui-button>
+      <div class="flex-row">
+        <sui-button class="labeled icon" @click="$emit('save-pattern')">
+          <i class="save icon"></i> Save
+        </sui-button>
+        <sui-button class="labeled icon" @click="$emit('load-pattern')">
+          <i class="cloud download icon"></i> Load
+        </sui-button>
+      </div>
       <sui-dropdown
         placeholder="Select a pattern"
         selection
@@ -66,11 +74,6 @@ export default {
         value: name
       }));
     }
-  },
-  methods: {
-    testEmit(e) {
-      console.log(e);
-    }
   }
 };
 </script>
@@ -89,5 +92,11 @@ export default {
 .btns {
   display: flex;
   flex-direction: column;
+}
+.flex-row {
+  display: flex;
+}
+.button {
+  flex-grow: 1;
 }
 </style>

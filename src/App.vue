@@ -11,6 +11,8 @@
           @click-clear="clickClear"
           @click-random="clickRandom"
           @select-pattern="selectPattern"
+          @save-pattern="savePattern"
+          @load-pattern="loadPattern"
           @select-playspeed="selectPlaySpeed"
           v-bind:preset_patterns="preset_patterns"
         />
@@ -117,6 +119,12 @@ export default {
     selectPattern(name) {
       clearInterval(this.timer);
       if (name) this.pattern = this.preset_patterns[name].map(a => [...a]);
+    },
+    savePattern() {
+      localStorage.pattern = JSON.stringify(this.pattern)
+    },
+    loadPattern() {
+      this.pattern = JSON.parse(localStorage.pattern)
     }
   },
   mounted() {
