@@ -15,12 +15,14 @@
           v-bind:preset_patterns="preset_patterns"
         />
       </div>
+      <Footer />
     </div>
   </div>
 </template>
 
 <script>
 import Header from "./components/Header.vue";
+import Footer from "./components/Footer.vue";
 import Grid from "./components/Grid.vue";
 import Controls from "./components/Controls.vue";
 import GOL from "./GOL/gol.js";
@@ -31,6 +33,7 @@ export default {
   name: "App",
   components: {
     Header,
+    Footer,
     Grid,
     Controls,
     VueElementLoading
@@ -122,7 +125,6 @@ export default {
 </script>
 
 <style>
-body { margin: 0; }
 #app {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
     Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;

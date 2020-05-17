@@ -1,14 +1,13 @@
 <template>
   <div class="wrapper">
     <div class="btns">
-      <button @click="$emit('click-next')">Next</button>
-      <button @click="$emit('click-play')">Play</button>
-      <button @click="$emit('click-clear')">Clear</button>
-      <button @click="$emit('click-random')">Random</button>
-      <select :value="selected" @input="$emit('select-pattern', $event.target.value)">
-        <option :value="null">– Select a ... –</option>
-        <option v-for="(value, name) in preset_patterns" :key="name">{{ name }}</option>
-      </select>
+      <sui-button class="teal" @click="$emit('click-next')">Next</sui-button>
+      <sui-button class="blue" @click="$emit('click-play')">Play</sui-button>
+      <sui-button class="red" @click="$emit('click-clear')">Clear</sui-button>
+      <sui-button @click="$emit('click-random')">Random</sui-button>
+      <sui-dropdown placeholder="Select a pattern" selection search @input="e => $emit('select-pattern', e) " :options="options" v-model="selected" />
+     
+      <span>Pick your play speed:</span>
       <vue-slide-bar
         v-model="sliderCustomzie.val"
         :min="1"
@@ -16,9 +15,8 @@
         :processStyle="sliderCustomzie.processStyle"
         :lineHeight="sliderCustomzie.lineHeight"
         :tooltipStyles="sliderCustomzie.tooltipStyles"
-        @input="e => $emit('select-playspeed', 1010 - Number.parseInt(e)*100)"
+        @input="e => $emit('select-playspeed', 1000 - Number.parseInt(e)*100)"
       ></vue-slide-bar>
-      <v-btn depressed small color="primary">Primary</v-btn>
     </div>
   </div>
 </template>
@@ -33,7 +31,7 @@ export default {
   },
   data() {
     return {
-      selected: "",
+      selected: null,
       sliderCustomzie: {
         val: 7,
         lineHeight: 10,
@@ -46,7 +44,18 @@ export default {
         }
       }
     };
+  },
+  computed: {
+    options : function () {
+      return Object.keys(this.preset_patterns).map(name => ({text:name, value:name}))
+    }
+  },
+  methods: {
+    testEmit(e) {
+      console.log(e)
+    }
   }
+
 };
 </script>
 
@@ -66,5 +75,6 @@ export default {
   flex-direction: column;
 }
 .button {
+  /* margin: 3px 0; */
 }
 </style>

@@ -6,10 +6,12 @@
 
 <script>
 export default {
-    name: "Template",
+    name: "Headers",
 }
 </script>
 
 <style scoped>
-
+h1 {
+    margin: 1em 0;
+}
 </style>
