@@ -14,10 +14,10 @@
         <i class="random icon"></i> Random
       </sui-button>
       <div class="flex-row">
-        <sui-button class="labeled icon" @click="$emit('save-pattern')">
+        <sui-button class="violet labeled icon" @click="$emit('save-pattern')">
           <i class="save icon"></i> Save
         </sui-button>
-        <sui-button class="labeled icon" @click="$emit('load-pattern')">
+        <sui-button class="purple labeled icon" @click="$emit('load-pattern')">
           <i class="cloud download icon"></i> Load
         </sui-button>
       </div>
@@ -88,6 +88,9 @@ export default {
     width: 100%;
     margin: 10px 0;
   }
+  .btns {
+    margin: 0 1em;
+  }
 }
 .btns {
   display: flex;
@@ -97,6 +100,7 @@ export default {
   display: flex;
 }
 .button {
+  margin-right: 0;
   flex-grow: 1;
 }
 </style>
