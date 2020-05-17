@@ -1,13 +1,27 @@
 <template>
   <div class="wrapper">
     <div class="btns">
-      <sui-button class="teal" @click="$emit('click-next')">Next</sui-button>
-      <sui-button class="blue" @click="$emit('click-play')">Play</sui-button>
-      <sui-button class="red" @click="$emit('click-clear')">Clear</sui-button>
-      <sui-button @click="$emit('click-random')">Random</sui-button>
-      <sui-dropdown placeholder="Select a pattern" selection search @input="e => $emit('select-pattern', e) " :options="options" v-model="selected" />
-     
-      <span>Pick your play speed:</span>
+      <sui-button class="teal labeled icon" @click="$emit('click-next')">
+        <i class="redo icon"></i> Next
+      </sui-button>
+      <sui-button class="blue labeled icon" @click="$emit('click-play')">
+        <i class="play icon"></i> Play
+      </sui-button>
+      <sui-button class="red labeled icon" @click="$emit('click-clear')">
+        <i class="trash alternate icon"></i> Clear
+      </sui-button>
+      <sui-button class="labeled icon" @click="$emit('click-random')">
+        <i class="random icon"></i> Random
+      </sui-button>
+      <sui-dropdown
+        placeholder="Select a pattern"
+        selection
+        search
+        @input="e => $emit('select-pattern', e) "
+        :options="options"
+        v-model="selected"
+      />
+
       <vue-slide-bar
         v-model="sliderCustomzie.val"
         :min="1"
@@ -17,6 +31,7 @@
         :tooltipStyles="sliderCustomzie.tooltipStyles"
         @input="e => $emit('select-playspeed', 1000 - Number.parseInt(e)*100)"
       ></vue-slide-bar>
+      <div class="ui pointing label">Control the play speed !</div>
     </div>
   </div>
 </template>
@@ -46,16 +61,18 @@ export default {
     };
   },
   computed: {
-    options : function () {
-      return Object.keys(this.preset_patterns).map(name => ({text:name, value:name}))
+    options: function() {
+      return Object.keys(this.preset_patterns).map(name => ({
+        text: name,
+        value: name
+      }));
     }
   },
   methods: {
     testEmit(e) {
-      console.log(e)
+      console.log(e);
     }
   }
-
 };
 </script>
 
@@ -73,8 +90,5 @@ export default {
 .btns {
   display: flex;
   flex-direction: column;
-}
-.button {
-  /* margin: 3px 0; */
 }
 </style>
